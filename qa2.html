@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời Tỏ Tình</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #d9534f;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .yes-btn {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .no-btn {
+            background-color: #d9534f;
+            color: white;
+            position: absolute;
+            z-index: 2;
+        }
+        .heart {
+            display: none;
+            font-size: 50px;
+            color: red;
+            margin-top: 20px;
+        }
+        /* Bảng thông báo to với hiệu ứng */
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 50%;
+            padding: 20px;
+            background-color: #ffcce0;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ff0066;
+            text-align: center;
+            animation: showAlert 0.5s forwards ease-in-out;
+            z-index: 3;
+        }
+        .custom-alert p {
+            margin: 0;
+            font-weight: bold;
+        }
+        @keyframes showAlert {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        /* Hiệu ứng bắn pháo hoa */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff5722;
+            border-radius: 50%;
+            animation: firework 1s linear infinite;
+            z-index: 0;
+        }
+        @keyframes firework {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="qa.jpg" alt="Your Image">
+        </div>
+        <h1>Quỳnh Anh, em có muốn trao đổi trái tim em lấy trái tim anh không?</h1>
+        <button class="btn yes-btn" onclick="showMessage()">Yes</button>
+        <button class="btn no-btn" onmouseover="moveNoButton()">No</button>
+        <div class="heart">❤️❤️❤️</div>
+        <!-- Bảng thông báo -->
+        <div class="custom-alert">
+            <p>Cảm ơn em, chúc mừng em tương lai là dâu Hải Phòng!</p>
+        </div>
+    </div>
+
+    <script>
+        function moveNoButton() {
+            const noButton = document.querySelector('.no-btn');
+            const x = Math.random() * (window.innerWidth - noButton.clientWidth);
+            const y = Math.random() * (window.innerHeight - noButton.clientHeight);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        function showMessage() {
+            document.querySelector('.heart').style.display = 'block';
+            document.querySelector('.custom-alert').style.display = 'block';
+            createFireworks();
+        }
+
+        function createFireworks() {
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                document.body.appendChild(firework);
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                firework.style.left = `${x}px`;
+                firework.style.top = `${y}px`;
+                setTimeout(() => {
+                    firework.remove();
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
